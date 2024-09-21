@@ -113,9 +113,13 @@
                 opacity: 1;
                 transform: translate(-50%, -50%) scale(0);
             }
+            50% {
+                opacity: 1;
+                transform: translate(calc(-50% + (30vw * var(--x))), calc(-50% + (40vh * var(--y)))) scale(1);
+            }
             100% {
                 opacity: 0;
-                transform: translate(calc(-50% + (40vw * var(--x))), calc(-50% + (50vh * var(--y)))) scale(1);
+                transform: translate(calc(-50% + (40vw * var(--x))), calc(-50% + (50vh * var(--y)))) scale(0);
             }
         }
     </style>
@@ -132,4 +136,21 @@
     
     <script>
         // Создание конфетти
-        function createConfetti()
+        function createConfetti() {
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.setProperty('--x', (Math.random() - 0.5) * 2); // Случайное направление по оси X
+                confetti.style.setProperty('--y', (Math.random() - 0.5) * 2); // Случайное направление по оси Y
+                document.body.appendChild(confetti);
+
+                // Удаление конфетти после анимации
+                setTimeout(() => confetti.remove(), 3000);
+            }
+        }
+
+        // Запуск конфетти через 1 секунду после загрузки страницы
+        setTimeout(createConfetti, 1000);
+    </script>
+</body>
+</html>
