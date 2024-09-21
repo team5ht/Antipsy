@@ -85,6 +85,37 @@
             0% { transform: translateY(0); opacity: 1; }
             100% { transform: translateY(-110vh); opacity: 0; }
         }
+
+        /* Конфетти */
+        .confetti {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 10px;
+            height: 20px;
+            background: red;
+            opacity: 0;
+            animation: explode 1s forwards;
+        }
+
+        .confetti:nth-child(odd) {
+            background: blue;
+        }
+
+        .confetti:nth-child(even) {
+            background: yellow;
+        }
+
+        @keyframes explode {
+            0% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(calc(-50% + (100vw * var(--x))), calc(-50% + (100vh * var(--y)))) scale(0.5);
+            }
+        }
     </style>
 </head>
 <body>
@@ -96,5 +127,24 @@
         <div class="balloon"></div>
         <div class="balloon"></div>
     </div>
+    
+    <script>
+        // Создание хлопушки с конфетти
+        function createConfetti() {
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.setProperty('--x', (Math.random() - 0.5) * 2); // Случайное направление по оси X
+                confetti.style.setProperty('--y', (Math.random() - 0.5) * 2); // Случайное направление по оси Y
+                document.body.appendChild(confetti);
+
+                // Удаление конфетти после анимации
+                setTimeout(() => confetti.remove(), 1000);
+            }
+        }
+
+        // Запуск хлопушки через 1 секунду после загрузки страницы
+        setTimeout(createConfetti, 1000);
+    </script>
 </body>
 </html>
