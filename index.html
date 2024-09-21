@@ -10,7 +10,7 @@
             background: #ff9a9e;
             background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fad0c4);
             background-size: 600% 600%;
-            animation: gradient 16s ease infinite;
+            animation: gradient 16s linear infinite;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -52,7 +52,7 @@
             height: 150px;
             background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.5), transparent 70%);
             border-radius: 50% 50% 50% 50%;
-            animation: floatUp 10s ease-in-out infinite;
+            animation: floatUp 10s linear infinite;
         }
 
         .balloon:nth-child(1) {
@@ -97,7 +97,7 @@
             opacity: 0;
             transform: scale(0);
             border-radius: 50%;
-            animation: explode 3s ease-out forwards;
+            animation: explode 3s linear forwards;
         }
 
         .confetti:nth-child(odd) {
@@ -113,13 +113,9 @@
                 opacity: 1;
                 transform: translate(-50%, -50%) scale(0);
             }
-            50% {
-                opacity: 1;
-                transform: translate(calc(-50% + (30vw * var(--x))), calc(-50% + (40vh * var(--y)))) scale(1);
-            }
             100% {
                 opacity: 0;
-                transform: translate(calc(-50% + (40vw * var(--x))), calc(-50% + (50vh * var(--y)))) scale(0);
+                transform: translate(calc(-50% + (40vw * var(--x))), calc(-50% + (50vh * var(--y)))) scale(1);
             }
         }
     </style>
@@ -136,21 +132,4 @@
     
     <script>
         // Создание конфетти
-        function createConfetti() {
-            for (let i = 0; i < 150; i++) {
-                const confetti = document.createElement('div');
-                confetti.classList.add('confetti');
-                confetti.style.setProperty('--x', (Math.random() - 0.5) * 2); // Случайное направление по оси X
-                confetti.style.setProperty('--y', (Math.random() - 0.5) * 2); // Случайное направление по оси Y
-                document.body.appendChild(confetti);
-
-                // Удаление конфетти после анимации
-                setTimeout(() => confetti.remove(), 3000);
-            }
-        }
-
-        // Запуск конфетти через 1 секунду после загрузки страницы
-        setTimeout(createConfetti, 2000);
-    </script>
-</body>
-</html>
+        function createConfetti()
