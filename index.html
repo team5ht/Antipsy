@@ -137,7 +137,7 @@
     <script>
         // Создание конфетти
         function createConfetti() {
-            for (let i = 0; i < 50; i++) {
+            for (let i = 0; i < 150; i++) {
                 const confetti = document.createElement('div');
                 confetti.classList.add('confetti');
                 confetti.style.setProperty('--x', (Math.random() - 0.5) * 2); // Случайное направление по оси X
@@ -150,7 +150,7 @@
         }
 
         // Запуск конфетти через 1 секунду после загрузки страницы
-        setTimeout(createConfetti, 1000);
+        setTimeout(createConfetti, 2000);
     </script>
 </body>
 </html>
