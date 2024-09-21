@@ -93,27 +93,33 @@
             left: 50%;
             width: 10px;
             height: 20px;
-            background: red;
+            background: #ff9a9e;
             opacity: 0;
-            animation: explode 1s forwards;
+            transform: scale(0);
+            border-radius: 50%;
+            animation: explode 3s ease-out forwards;
         }
 
         .confetti:nth-child(odd) {
-            background: blue;
+            background: #fad0c4;
         }
 
         .confetti:nth-child(even) {
-            background: yellow;
+            background: #fcb69f;
         }
 
         @keyframes explode {
             0% {
                 opacity: 1;
-                transform: translate(-50%, -50%) scale(1);
+                transform: translate(-50%, -50%) scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: translate(calc(-50% + (30vw * var(--x))), calc(-50% + (40vh * var(--y)))) scale(1);
             }
             100% {
                 opacity: 0;
-                transform: translate(calc(-50% + (100vw * var(--x))), calc(-50% + (100vh * var(--y)))) scale(0.5);
+                transform: translate(calc(-50% + (40vw * var(--x))), calc(-50% + (50vh * var(--y)))) scale(0);
             }
         }
     </style>
@@ -129,9 +135,9 @@
     </div>
     
     <script>
-        // Создание хлопушки с конфетти
+        // Создание конфетти
         function createConfetti() {
-            for (let i = 0; i < 100; i++) {
+            for (let i = 0; i < 50; i++) {
                 const confetti = document.createElement('div');
                 confetti.classList.add('confetti');
                 confetti.style.setProperty('--x', (Math.random() - 0.5) * 2); // Случайное направление по оси X
@@ -139,11 +145,11 @@
                 document.body.appendChild(confetti);
 
                 // Удаление конфетти после анимации
-                setTimeout(() => confetti.remove(), 1000);
+                setTimeout(() => confetti.remove(), 3000);
             }
         }
 
-        // Запуск хлопушки через 1 секунду после загрузки страницы
+        // Запуск конфетти через 1 секунду после загрузки страницы
         setTimeout(createConfetti, 1000);
     </script>
 </body>
